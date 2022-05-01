@@ -1,0 +1,16 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  color: rgb(0, 0, 0);
+}
+
+#mainForm {
+    margin-top: 40px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
