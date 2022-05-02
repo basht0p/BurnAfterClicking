@@ -2,8 +2,21 @@
 
 // Load Node modules
 const sqlite3 = require('sqlite3').verbose();
+const nodeCron = require('node-cron')
 let db = new sqlite3.Database('./db/links.db');
 var express = require('express');
+
+
+nodeCron.schedule("* * * * *", function jobInit() {
+
+    var currentDateTime = new Date();
+
+    let expirationQuery = `DELETE FROM links WHERE ${currentDateTime.getTime()} >= ttl`
+
+    db.all(expirationQuery, (err) => {
+        if (err) return console.log(err.message);
+    });
+});
 
 
 // Initialise Express
@@ -25,6 +38,8 @@ app.get('/api/linkget', function (req, res) {
 
     let getQuery = `SELECT data FROM links WHERE iv = "${req.query.i}";`;
 
+    let killQuery = `DELETE FROM links WHERE iv = "${req.query.i}";`;
+
     db.all(getQuery, (err, rows) => {
         if (err) return console.log(err.message);
 
@@ -33,21 +48,19 @@ app.get('/api/linkget', function (req, res) {
             res.send( { 'result': row.data } )
         })
     });
-    //console.log( __dirname + '\\public\\index.html' )
-    //res.sendFile(__dirname + '\\public\\index.html' )
-    //res.send( { 'result': result } )
-    
+
+    db.run(killQuery)
 });
 
 app.post('/api/linkgen', function (req, res) {
     const iv = req.body.iv;
     const data = req.body.data;
+    const ttl = req.body.ttl;
 
-    console.log(iv + data)
+    let insertQuery = `INSERT INTO links(iv,data,ttl) VALUES (?, ?, ?)`;
 
-    let insertQuery = `INSERT INTO links(iv,data) VALUES (?, ?)`;
 
-    db.run(insertQuery, [iv,data], (err) => {
+    db.run(insertQuery, [iv,data,ttl], (err) => {
         if (err) return console.log(err.message);
     });
 

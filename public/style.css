@@ -1,16 +1,97 @@
-html,
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #1a1a1a;
-  color: rgb(0, 0, 0);
+    background: rgb(30,30,40);
 }
 
-#mainForm {
-    margin-top: 40px;
-    width: 60%;
+form {
+    max-width: 40%;
+    margin: 50px auto;
+}
+
+.logo {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
 }
+
+#info {
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    max-width: 40%;
+    margin: 50px auto;
+}
+
+#info h2 {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+#info p {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.feedback-input {
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 5px;
+    line-height: 22px;
+    background-color: transparent;
+    border: 2px solid #00124d;
+    transition: all 0.3s;
+    padding: 13px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+    .feedback-input:focus {
+        border: 2px solid #002499;
+    }
+
+#message {
+    height: 150px;
+    line-height: 150%;
+    resize: vertical;
+}
+
+#link {
+    height: 50px;
+    line-height: 100%;
+    resize: vertical;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.dropdownOption {
+    color: #ffffff;
+    background: rgb(30,30,40);
+}
+
+.dropdownDisabledOption {
+    color: #808080;
+}
+
+[type="submit"] {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    width: 100%;
+    background: #00124d;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: all 0.3s;
+    margin-top: -4px;
+    font-weight: 700;
+}
+
+    [type="submit"]:hover {
+        background: #002499;
+    }

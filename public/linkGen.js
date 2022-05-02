@@ -1,4 +1,3 @@
-
 function makeid(length) {
 	var result = '';
 	var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -35,14 +34,21 @@ $("#messageForm").submit(function (event) {
 
 	event.preventDefault();
 
-	var msgInput = $("#messageForm").find('input[name="message"]').val();
+	var duration = $("#messageForm").find('select[name="ttl"]').val();
+
+	var expiration = new Date();
+
+	expiration.setMinutes( expiration.getMinutes() + parseInt(duration))
+
+	var msgInput = $("#messageForm").find('textarea[name="message"]').val();
 
 	var encryptedMsg = encryptMsg(msgInput)
 
 	// AJAX options for LinkGen POST
 	var postData = {
 		"data": (encryptedMsg.toString()),
-		"iv": ivInit
+		"iv": ivInit,
+		"ttl": expiration.getTime()
 	}
 	const linkGenAjax = {
 		"type": 'POST',
@@ -52,7 +58,7 @@ $("#messageForm").submit(function (event) {
 		"async": false
 	}
 
-	// Send the data using post
+	// Send the post
 	$.ajax(linkGenAjax);
 
 	// Set link field to newly created link
