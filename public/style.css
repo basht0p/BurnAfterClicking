@@ -1,18 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
-    background: rgb(30,30,40);
+    background: #222222;
 }
 
 form {
     max-width: 40%;
     margin: 50px auto;
-}
-
-.logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #info {
@@ -40,7 +34,7 @@ form {
     border-radius: 5px;
     line-height: 22px;
     background-color: transparent;
-    border: 2px solid #00124d;
+    border: 3px solid #253a53;
     transition: all 0.3s;
     padding: 13px;
     margin-bottom: 15px;
@@ -50,7 +44,7 @@ form {
 }
 
     .feedback-input:focus {
-        border: 2px solid #002499;
+        border: 2px solid #2f4a6a;
     }
 
 #message {
@@ -69,7 +63,7 @@ form {
 
 .dropdownOption {
     color: #ffffff;
-    background: rgb(30,30,40);
+    background: #222222;
 }
 
 .dropdownDisabledOption {
@@ -79,7 +73,7 @@ form {
 [type="submit"] {
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     width: 100%;
-    background: #00124d;
+    background: #253a53;
     border-radius: 5px;
     border: 0;
     cursor: pointer;
@@ -93,5 +87,5 @@ form {
 }
 
     [type="submit"]:hover {
-        background: #002499;
+        background: #2f4a6a;
     }

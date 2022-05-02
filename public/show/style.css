@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
-    background: rgb(30,30,40);
+    background: #222222;
     max-width: 40%;
     margin: 50px auto;
     color: white;
@@ -12,12 +12,6 @@ body {
     text-align: center;
 }
 
-.logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .feedback-input {
     color: white;
     font-family: Helvetica, Arial, sans-serif;
@@ -26,7 +20,7 @@ body {
     border-radius: 5px;
     line-height: 22px;
     background-color: transparent;
-    border: 2px solid #00124d;
+    border: 3px solid #253a53;
     transition: all 0.3s;
     padding: 13px;
     margin-bottom: 15px;
@@ -37,7 +31,7 @@ body {
 }
 
     .feedback-input:focus {
-        border: 2px solid #002499;
+        border: 2px solid #2f4a6a;
     }
 
 #link {
