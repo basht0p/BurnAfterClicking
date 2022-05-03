@@ -28,3 +28,8 @@ var decryptedMsg = CryptoJS.AES.decrypt(
 ).toString(CryptoJS.enc.Utf8);
 
 document.getElementById('link').value = decryptedMsg;
+
+function setHeight(fieldId) {
+	document.getElementById(fieldId).style.height = document.getElementById(fieldId).scrollHeight + 'px';
+}
+setHeight('link');

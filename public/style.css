@@ -43,9 +43,10 @@ form {
     outline: 0;
 }
 
-    .feedback-input:focus {
-        border: 2px solid #2f4a6a;
-    }
+
+.feedback-input:focus {
+    border: 2px solid #2f4a6a;
+}
 
 #message {
     height: 150px;
@@ -89,3 +90,39 @@ form {
     [type="submit"]:hover {
         background: #2f4a6a;
     }
+
+.msg {
+    color: white;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#container {
+    color: white;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    text-align: center;
+    max-width: 40%;
+    margin: 50px auto;
+}
+
+.linkBox {
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 5px;
+    line-height: 22px;
+    background-color: transparent;
+    border: 3px solid #253a53;
+    transition: all 0.3s;
+    padding: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: 0;
+    overflow: hidden;
+}
+
+mark {
+    background-color: rgba(255, 0, 0, 0.5);
+    color: white;
+}

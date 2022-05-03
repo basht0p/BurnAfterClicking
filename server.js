@@ -21,8 +21,9 @@ nodeCron.schedule("* * * * *", function jobInit() {
 });
 
 // Define annoying paths
-var showhtml = __dirname + '\\public\\show\\show.html'
-var show404 = __dirname + '\\public\\show\\404.html'
+var indexhtml = __dirname + '\\statichtml\\index.html'
+var showhtml = __dirname + '\\statichtml\\show.html'
+var html404 = __dirname + '\\statichtml\\404.html'
 
 // Initialise Express
 var express = require('express');
@@ -38,6 +39,11 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
+// Landing page to generate message and link
+app.get('/', function (req, res) {
+    res.sendFile(indexhtml)
+    });
+
 // Validate query parameters, return data to corresponding initVector, delete row
 app.get('/api/linkget',
     [check('i').isLength({ min: 16, max: 16 }).trim().escape(),
@@ -48,7 +54,7 @@ app.get('/api/linkget',
         var vres = validationResult(req).array();
         if (vres[0]) {
             console.log(vres[0].msg)
-            res.sendFile(show404);
+            res.sendFile(html404);
             return;
         }
 
@@ -65,7 +71,7 @@ app.get('/api/linkget',
             })
         }
         if (rows.length == 0) {
-            res.status(404).sendFile(show404);
+            res.status(404).sendFile(html404);
             return;
         }
     });
@@ -81,7 +87,7 @@ app.get('/show/',
         var vres = validationResult(req).array();
         if (vres[0]) {
             console.log(vres[0].msg)
-            res.status(404).sendFile(show404);
+            res.status(404).sendFile(html404);
             return;
         }
         res.sendFile(showhtml);
