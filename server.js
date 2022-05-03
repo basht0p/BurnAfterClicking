@@ -3,10 +3,12 @@
 // Load Node modules
 const sqlite3 = require('sqlite3').verbose();
 const nodeCron = require('node-cron')
+const { check, validationResult } = require('express-validator');
+
+
 let db = new sqlite3.Database('./db/links.db');
-var express = require('express');
 
-
+// Schedule deletion of stale links
 nodeCron.schedule("* * * * *", function jobInit() {
 
     var currentDateTime = new Date();
@@ -18,8 +20,12 @@ nodeCron.schedule("* * * * *", function jobInit() {
     });
 });
 
+// Define annoying paths
+var showhtml = __dirname + '\\public\\show\\show.html'
+var show404 = __dirname + '\\public\\show\\404.html'
 
 // Initialise Express
+var express = require('express');
 var app = express();
 
 // Render static files
@@ -32,25 +38,55 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
-// input content and generate link
+// Validate query parameters, return data to corresponding initVector, delete row
+app.get('/api/linkget',
+    [check('i').isLength({ min: 16, max: 16 }).trim().escape(),
+        check('i').notEmpty(),
+        check('i').matches('^[a-zA-Z0-9]*$')
+    ],
+    function (req, res) {
+        var vres = validationResult(req).array();
+        if (vres[0]) {
+            console.log(vres[0].msg)
+            res.sendFile(show404);
+            return;
+        }
 
-app.get('/api/linkget', function (req, res) {
+        let getQuery = `SELECT data FROM links WHERE iv = "${req.query.i}";`;
 
-    let getQuery = `SELECT data FROM links WHERE iv = "${req.query.i}";`;
-
-    let killQuery = `DELETE FROM links WHERE iv = "${req.query.i}";`;
+        let killQuery = `DELETE FROM links WHERE iv = "${req.query.i}";`;
 
     db.all(getQuery, (err, rows) => {
         if (err) return console.log(err.message);
-
-        rows.forEach(row => {
-            console.log(row.data)
-            res.send( { 'result': row.data } )
-        })
+        console.log(rows.length)
+        if (rows.length > 0) {
+            rows.forEach(row => {
+                res.send({ 'result': row.data })
+            })
+        }
+        if (rows.length == 0) {
+            res.status(404).sendFile(show404);
+            return;
+        }
+    });
+    db.run(killQuery)
     });
 
-    db.run(killQuery)
-});
+app.get('/show/',
+    [check('i').isLength({ min: 16, max: 16 }).trim().escape(),
+    check('i').notEmpty(),
+    check('i').matches('^[a-zA-Z0-9]*$')
+    ],
+    function (req, res) {
+        var vres = validationResult(req).array();
+        if (vres[0]) {
+            console.log(vres[0].msg)
+            res.status(404).sendFile(show404);
+            return;
+        }
+        res.sendFile(showhtml);
+    });
+
 
 app.post('/api/linkgen', function (req, res) {
     const iv = req.body.iv;
