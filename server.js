@@ -79,7 +79,7 @@ app.get('/api/linkget',
     });
     db.run(killQuery)
 
-    console.log("Message viewed and burned by: " + req.ip)
+    console.log("Message viewed and burned by: " + req.socket.remoteaddress)
     });
 
 app.get('/show/',
