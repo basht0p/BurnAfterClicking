@@ -21,9 +21,9 @@ nodeCron.schedule("* * * * *", function jobInit() {
 });
 
 // Define annoying paths
-var indexhtml = __dirname + '\\statichtml\\index.html'
-var showhtml = __dirname + '\\statichtml\\show.html'
-var html404 = __dirname + '\\statichtml\\404.html'
+var indexhtml = __dirname + '/statichtml/index.html'
+var showhtml = __dirname + '/statichtml/show.html'
+var html404 = __dirname + '/statichtml/404.html'
 
 // Initialise Express
 var express = require('express');
