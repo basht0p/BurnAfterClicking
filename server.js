@@ -77,7 +77,7 @@ app.get('/api/linkget',
     });
     db.run(killQuery)
 
-    console.log("Message viewed and burned by: " + req.headers['x-forwarded-for'])
+    console.log("Message viewed and burned by: " + req.headers)
     });
 
 app.get('/show/',
