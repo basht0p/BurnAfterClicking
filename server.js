@@ -39,7 +39,7 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
-app.set('trust proxy', true)
+app.set('trust proxy', 'loopback')
 
 // Landing page to generate message and link
 app.get('/', function (req, res) {
