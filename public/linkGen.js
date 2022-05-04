@@ -62,6 +62,6 @@ $("#messageForm").submit(function (event) {
 	$.ajax(linkGenAjax);
 
 	// Set link field to newly created link
-	document.getElementById('link').value = "http://localhost:8080/show/?i=" + ivInit + "&n=" + keyInit
+	document.getElementById('link').value = "http://burnafterclicking.com/show/?i=" + ivInit + "&n=" + keyInit
 
 });
