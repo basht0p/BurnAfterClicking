@@ -64,7 +64,7 @@ app.get('/api/linkget',
 
     db.all(getQuery, (err, rows) => {
         if (err) return console.log(err.message);
-        console.log(rows.length)
+        
         if (rows.length > 0) {
             rows.forEach(row => {
                 res.send({ 'result': row.data })
@@ -76,6 +76,8 @@ app.get('/api/linkget',
         }
     });
     db.run(killQuery)
+
+    console.log("Message viewed and burned by: " + req.headers['x-forwarded-for'])
     });
 
 app.get('/show/',
