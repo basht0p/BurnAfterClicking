@@ -77,7 +77,7 @@ app.get('/api/linkget',
     });
     db.run(killQuery)
 
-    console.log("Message viewed and burned by: " + req.headers)
+    console.log("Message viewed and burned by: " + req.headers.toString())
     });
 
 app.get('/show/',
