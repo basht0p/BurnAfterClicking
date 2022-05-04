@@ -133,6 +133,6 @@ mark {
 @media screen and (max-width: 800px) {
     #info, .feedback-input, .linkBox, #container, [type="submit"], #link, #message, #info, form {
       width: 100%;
-      font-size: 1.3vw;
+      font-size: 2vw;
     }
   }
