@@ -1,2 +1,2 @@
-# SecretShare
+# BurnAfterClicking
  
