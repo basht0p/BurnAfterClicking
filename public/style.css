@@ -12,9 +12,9 @@ form {
 #info {
     color: white;
     font-weight: 500;
-    font-size: 1.6vw;
+    font-size: 22px;
     text-align: center;
-    max-width: 70%;
+    max-width: 50%;
     margin: 50px auto;
 }
 
@@ -30,7 +30,7 @@ form {
     color: white;
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 500;
-    font-size: 1.1vw;
+    font-size: 18px;
     border-radius: 5px;
     line-height: 22px;
     background-color: transparent;
@@ -53,7 +53,7 @@ form {
     height: 150px;
     line-height: 150%;
     resize: vertical;
-    font-size: 1.3vw;
+    font-size: 18px;
 }
 
 #link {
@@ -62,7 +62,7 @@ form {
     resize: vertical;
     text-align: center;
     font-weight: bolder;
-    font-size: 1.3vw;
+    font-size: 18px;
 }
 
 .dropdownOption {
@@ -129,3 +129,10 @@ mark {
     background-color: rgba(255, 0, 0, 0.5);
     color: white;
 }
+
+@media screen and (max-width: 800px) {
+    #info, .feedback-input, .linkBox, #container, [type="submit"], #link, #message, #info, form {
+      width: 100%;
+      font-size: 1.3vw;
+    }
+  }
