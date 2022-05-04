@@ -63,5 +63,9 @@ $("#messageForm").submit(function (event) {
 
 	// Set link field to newly created link
 	document.getElementById('link').value = "https://burnafterclicking.com/show/?i=" + ivInit + "&n=" + keyInit
-
+	
+	function setHeight(fieldId) {
+		document.getElementById(fieldId).style.height = document.getElementById(fieldId).scrollHeight + 'px';
+	}
+	setHeight('link');
 });
