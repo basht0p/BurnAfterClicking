@@ -39,6 +39,8 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
+app.set('trust proxy', true)
+
 // Landing page to generate message and link
 app.get('/', function (req, res) {
     res.sendFile(indexhtml)
@@ -77,7 +79,7 @@ app.get('/api/linkget',
     });
     db.run(killQuery)
 
-    console.log("Message viewed and burned by: " + req.headers.toString())
+    console.log("Message viewed and burned by: " + req.ip)
     });
 
 app.get('/show/',
