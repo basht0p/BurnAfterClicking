@@ -41,6 +41,7 @@ form {
     width: 100%;
     box-sizing: border-box;
     outline: 0;
+    overflow: hidden;
 }
 
 
