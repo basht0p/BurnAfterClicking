@@ -3,12 +3,15 @@
 ## Generating the secret message
 ```mermaid
 sequenceDiagram
-CLIENT ->> SERVER: HTTP GET '/'
-SERVER-->> CLIENT: sendFile( index.html )
-Note left of CLIENT: CLIENT fills form and encrypts data<br> using linkGen.js from generated<br> initVector and key.
+Client->> Server: HTTP GET '/'
+Server-->> Client: sendFile( index.html )
+Note left of Client: Client fills form and encrypts data<br> using linkGen.js from generated<br> initVector and key.
 
-CLIENT->>SERVER: HTTP POST '/api/linkgen'
-Note right of SERVER: POST contains AES initVector <br>and encrypted data as UTF8.
+Client->>Server: HTTP POST '/api/linkgen'
+Client-->>Client: Client generates link <br>from ivInit and keyInit
+Note left of Server: POST contains AES initVector (iv),<br> encrypted data (data), and the <br>expiration timestamp (ttl).
+Server->>Database: INSERT INTO links(iv,data,ttl)<br> VALUES ${iv}, ${data}, ${ttl}
+
 ```
 
 ## Returning the secret message
