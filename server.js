@@ -5,7 +5,7 @@ const sqlite3 = require('sqlite3').verbose();
 const nodeCron = require('node-cron')
 const { check, validationResult } = require('express-validator');
 
-
+// init DB
 let db = new sqlite3.Database('./db/links.db');
 
 // Schedule deletion of stale links
