@@ -60,11 +60,13 @@ app.get('/api/linkget',
             return;
         }
 
-        let getQuery = `SELECT data FROM links WHERE iv = "${req.query.i}";`;
+        var iv = req.query.i
 
-        let killQuery = `DELETE FROM links WHERE iv = "${req.query.i}";`;
+        let getQuery = `SELECT data FROM links WHERE iv = (?));`;
 
-    db.all(getQuery, (err, rows) => {
+        let killQuery = `DELETE FROM links WHERE iv = (?);`;
+
+    db.all(getQuery, iv, (err, rows) => {
         if (err) return console.log(err.message);
         if (rows.length > 0) {
             rows.forEach(row => {
@@ -76,7 +78,7 @@ app.get('/api/linkget',
             return;
         }
     });
-    db.run(killQuery)
+    db.run(killQuery, iv)
     });
 
 app.get('/show/',
