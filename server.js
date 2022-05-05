@@ -62,9 +62,9 @@ app.get('/api/linkget',
 
         var iv = req.query.i
 
-        let getQuery = `SELECT data FROM links WHERE iv = (?));`;
+        let getQuery = `SELECT data FROM links WHERE iv = "(?)");`;
 
-        let killQuery = `DELETE FROM links WHERE iv = (?);`;
+        let killQuery = `DELETE FROM links WHERE iv = "(?)";`;
 
     db.all(getQuery, iv, (err, rows) => {
         if (err) return console.log(err.message);
