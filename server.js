@@ -21,12 +21,19 @@ nodeCron.schedule("* * * * *", function jobInit() {
 });
 
 // Define annoying paths
-var indexhtml = __dirname + '/statichtml/index.html'
-var showhtml = __dirname + '/statichtml/show.html'
-var html404 = __dirname + '/statichtml/404.html'
+var indexhtml = __dirname + '\\statichtml\\index.html'
+var showhtml = __dirname + '\\statichtml\\show.html'
+var html404 = __dirname + '\\statichtml\\404.html'
 
 // Initialise Express
 var express = require('express');
+var RateLimit = require('express-rate-limit');
+const apiLimiter = RateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
 var app = express();
 
 // Render static files
@@ -38,19 +45,21 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.json());
+//app.use(limiter);
 
 app.set('trust proxy', 'loopback', true)
 
 // Landing page to generate message and link
-app.get('/', function (req, res) {
+app.get('/', apiLimiter, function (req, res) {
     res.sendFile(indexhtml)
     });
 
 // Validate query parameters, return data to corresponding initVector, delete row
-app.get('/api/linkget',
+app.get('/api/linkget', 
     [check('i').isLength({ min: 16, max: 16 }).trim().escape(),
         check('i').notEmpty(),
-        check('i').matches('^[a-zA-Z0-9]*$')
+        check('i').matches('^[a-zA-Z0-9]*$'),
+        apiLimiter
     ],
     function (req, res) {
         var vres = validationResult(req).array();
@@ -84,7 +93,8 @@ app.get('/api/linkget',
 app.get('/show/',
     [check('i').isLength({ min: 16, max: 16 }).trim().escape(),
     check('i').notEmpty(),
-    check('i').matches('^[a-zA-Z0-9]*$')
+    check('i').matches('^[a-zA-Z0-9]*$'),
+    apiLimiter
     ],
     function (req, res) {
         var vres = validationResult(req).array();
@@ -97,7 +107,7 @@ app.get('/show/',
     });
 
 
-app.post('/api/linkgen', function (req, res) {
+app.post('/api/linkgen', apiLimiter, function (req, res) {
     const iv = req.body.iv;
     const data = req.body.data;
     const ttl = req.body.ttl;
